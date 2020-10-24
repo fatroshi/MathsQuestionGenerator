@@ -1,0 +1,73 @@
+@import "./src/baseStyle/baseStyle";
+
+@mixin sm-row {
+  display: flex;
+  justify-content: space-between;
+  max-width: 270px;
+
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  border-left: lightgray solid 1px;
+  border-top: lightgray solid 1px;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+
+}
+
+// extends .sm-row
+.sm-first-row {
+  @include sm-row;
+  border-top: lightgray solid 1px;
+  //border-right: lightgray solid 1px;
+  border-bottom: lightgray solid 1px;
+}
+
+.md-row {
+  @include sm-row;
+  border-top: lightgray solid 1px;
+}
+
+.penultimate-row {
+  @include sm-row;
+}
+
+.equal-row {
+  @include sm-row;
+  border-top: black solid 2px;
+  border-bottom: lightgray solid 1px;
+}
+
+.sm-box {
+  border-right: lightgray solid 1px;
+  width: 40px;
+  height: 25px;
+}
+
+.md-box {
+  border-right: lightgray solid 1px;
+  height: 45px;
+  width: 100%;
+  padding-top: 5px;
+  font-size: $h4;
+}
+
+.operator {
+  //border-left: lightgray solid 1px;
+  //width: 40px;
+  //height: 25px;
+  //auto: 0;
+  //font-size: $h3;
+}
+
+.first-term{
+  color: $blue;
+}
+
+.second-term{
+  color: $orange;
+}
+
+
