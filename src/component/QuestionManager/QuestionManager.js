@@ -2,6 +2,8 @@ import React from 'react';
 import BoxNumber from "../BoxNumber/BoxNumber";
 import { Container, Row, Col } from "react-bootstrap";
 import { connect } from 'react-redux';
+import { saveAs } from 'file-saver';
+import html2canvas from 'html2canvas';
 import './style.scss';
 
 const MAX_INTEGER = 10;
@@ -9,6 +11,15 @@ const MAX_INTEGER = 10;
 class QuestionManager extends React.Component {
     constructor(...props) {
         super(...props);
+    }
+
+    SaveAsPNG = () => {
+        html2canvas(document.getElementById("capture")).then(function(canvas) {
+            //document.body.appendChild(canvas);
+            canvas.toBlob((blob) => {
+                saveAs(canvas.toDataURL(), 'test.png');
+            },'image/png')
+        });
     }
 
     genRandomInteger = (maxLimit) => {
@@ -54,7 +65,7 @@ class QuestionManager extends React.Component {
 
     render() {
         return (
-            <Container >
+            <Container id='capture'>
                 <h1>{this.props.userReducer.name}</h1>
                 <h1>{console.log(this.props.mathReducer.lastQuestions)}</h1>
 
@@ -68,8 +79,8 @@ class QuestionManager extends React.Component {
                     ))}
                 </Row>
 
-                <button onClick={() => this.addQuestions(1)}>Add Questions</button>
-                <button onClick={() => this.props.setName('Atroshi')}>Test</button>
+                <button onClick={() => this.addQuestions(12)}>Add Questions</button>
+                <button onClick={() => this.SaveAsPNG()}>Save</button>
             </Container>
         );
     }

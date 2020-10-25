@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Row, Col } from "react-bootstrap";
 import downArrow from '../../img/downArrow.png';
 import style from './style.scss'
+import Image from 'react-bootstrap/Image'
 
 class BoxNumber extends React.Component {
 
@@ -39,7 +40,7 @@ class BoxNumber extends React.Component {
                     <Row>
                         <Col>  </Col>
                         <Col>  </Col>
-                            <img src={downArrow} className={'arrow-image'}/>
+                            <Image src={downArrow} className={'down-arrow'}/>
                         <Col>  </Col>
                         <Col>  </Col>
                     </Row>
