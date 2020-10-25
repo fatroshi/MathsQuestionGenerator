@@ -6,6 +6,9 @@ import { saveAs } from 'file-saver';
 import html2canvas from 'html2canvas';
 import './style.scss';
 
+import TaskFactory from "../../lib/TaskFactory";
+import {GRADE, OPERATION} from "../../lib/Question";
+
 const MAX_INTEGER = 10;
 
 class QuestionManager extends React.Component {
@@ -17,7 +20,7 @@ class QuestionManager extends React.Component {
         html2canvas(document.getElementById("capture")).then(function(canvas) {
             //document.body.appendChild(canvas);
             canvas.toBlob((blob) => {
-                saveAs(canvas.toDataURL(), 'test.png');
+                saveAs(canvas.toDataURL(), 'test.png', true);
             },'image/png')
         });
     }
@@ -61,6 +64,11 @@ class QuestionManager extends React.Component {
     componentDidMount()
     {
         //Todo: Trigger addQuestions(quantity)
+
+        // Testing:
+        let factory = new TaskFactory(GRADE.FIRST);
+        let question = factory.create(OPERATION.ADDITION);
+        console.log(question);
     }
 
     render() {
@@ -79,7 +87,7 @@ class QuestionManager extends React.Component {
                     ))}
                 </Row>
 
-                <button onClick={() => this.addQuestions(12)}>Add Questions</button>
+                <button onClick={() => this.addQuestions(16)}>Add Questions</button>
                 <button onClick={() => this.SaveAsPNG()}>Save</button>
             </Container>
         );
