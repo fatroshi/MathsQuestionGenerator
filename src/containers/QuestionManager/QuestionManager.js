@@ -8,6 +8,7 @@ import './style.scss';
 
 import TaskFactory from "../../lib/TaskFactory";
 import {GRADE, OPERATION} from "../../lib/Question";
+import {addQuestion} from "../../actions/questionActions";
 
 const MAX_INTEGER = 10;
 
@@ -43,7 +44,7 @@ class QuestionManager extends React.Component {
         num4 = this.genNextInteger(num2);
 
 
-        while(this.props.mathReducer.lastQuestions.includes([{num1, num2, num3, num4}]))
+        while(this.props.questionReducer.lastQuestions.includes([{num1, num2, num3, num4}]))
         {
             num1 = this.genRandomInteger(MAX_INTEGER);
             num3 = this.genNextInteger(num1);
@@ -54,7 +55,7 @@ class QuestionManager extends React.Component {
         return [{num1, num2, num3, num4}];
     }
 
-    addQuestions = (quantity) => {
+    createQuestions = (quantity) => {
         for(let i=0; i < quantity; ++i)
         {
             this.props.addQuestion(this.createQuestion());
@@ -75,10 +76,10 @@ class QuestionManager extends React.Component {
         return (
             <Container id='capture'>
                 <h1>{this.props.userReducer.name}</h1>
-                <h1>{console.log(this.props.mathReducer.lastQuestions)}</h1>
+                <h1>{console.log(this.props.questionReducer.lastQuestions)}</h1>
 
                 <Row className={'questions-container row-spacing'}>
-                    {this.props.mathReducer.lastQuestions.map((questions, index) =>(
+                    {this.props.questionReducer.lastQuestions.map((questions, index) =>(
                         <Row className={'row-spacing'} key={index}>
                             {questions.map((question, index2) => (
                                 <Col key={index2}><BoxNumber question={question} /></Col>
@@ -87,7 +88,7 @@ class QuestionManager extends React.Component {
                     ))}
                 </Row>
 
-                <button onClick={() => this.addQuestions(16)}>Add Questions</button>
+                <button onClick={() => this.createQuestions(16)}>Add Questions</button>
                 <button onClick={() => this.SaveAsPNG()}>Save</button>
             </Container>
         );
@@ -97,7 +98,7 @@ class QuestionManager extends React.Component {
 const mapStateToProps = (state) => {
   return {
       userReducer: state.userReducer,
-      mathReducer: state.mathReducer,
+      questionReducer: state.questionReducer,
   };
 };
 
@@ -111,13 +112,20 @@ const mapDispatchToProps = (dispatch) => {
                payload: name
             });
         },
-
+        // alt 1.
+        /*
         addQuestion: (question) => {
             dispatch({
                type: 'ADD_QUESTION',
                payload: question
             });
+        }*/
+
+        // alt. 2
+        addQuestion: (question) => {
+            dispatch(addQuestion(question));
         }
+
     }
 };
 
