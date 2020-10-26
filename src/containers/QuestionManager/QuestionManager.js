@@ -1,5 +1,5 @@
 import React from 'react';
-import BoxNumber from "../BoxNumber/BoxNumber";
+import BoxNumber from "../../components/BoxNumber/BoxNumber";
 import { Container, Row, Col } from "react-bootstrap";
 import { connect } from 'react-redux';
 import { saveAs } from 'file-saver';
@@ -101,6 +101,7 @@ const mapStateToProps = (state) => {
   };
 };
 
+// Actions to use
 const mapDispatchToProps = (dispatch) => {
     return {
         //TODO: setName action is just for testing, remove it later

@@ -1,7 +1,7 @@
 
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import QuestionManager from './component/QuestionManager/QuestionManager'
+import QuestionManager from './containers/QuestionManager/QuestionManager'
 import './App.css';
 
 function App() {

@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import {applyMiddleware, combineReducers, createStore} from 'redux';
 import logger from 'redux-logger';
 import {Provider} from 'react-redux';
-//import {userReducer} from './component/reducers/userReducer'
+//import {userReducer} from './components/reducers/userReducer'
 
 const initialState = {
     question: 1,
