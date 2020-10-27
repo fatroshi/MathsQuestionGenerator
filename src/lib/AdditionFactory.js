@@ -8,9 +8,13 @@ export default class AdditionFactory {
 
     createQuestion = () => {
         let question = new Question(OPERATION.ADDITION, this.grade);
-        question.createQuestion();
+        question.create();
 
-        // TODO: Before push check if the question is unique
+        while(this.questions.includes(question.numbers))
+        {
+            question.create();
+        }
+
         this.questions.push({question: question});
 
         return question;

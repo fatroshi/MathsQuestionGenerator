@@ -11,10 +11,13 @@ export default class TaskFactory {
     create = (operation) => {
         switch (operation)
         {
-            case OPERATION.ADDITION: return this.additionFactory.createQuestion();
+            case OPERATION.ADDITION:
+                return this.additionFactory.createQuestion();
+
             case OPERATION.SUBTRACTION:
                 //TODO: implement
                 return null;
+
             case OPERATION.MULTIPLICATION:
                 //TODO: implement
                 return null;

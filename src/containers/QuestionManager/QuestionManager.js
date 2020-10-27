@@ -15,6 +15,7 @@ const MAX_INTEGER = 10;
 class QuestionManager extends React.Component {
     constructor(...props) {
         super(...props);
+        this.factory = new TaskFactory(GRADE.FIRST);
     }
 
     saveAsPNG = () => {
@@ -26,50 +27,17 @@ class QuestionManager extends React.Component {
         });
     }
 
-    genRandomInteger = (maxLimit) => {
-        return Math.floor(Math.random() * maxLimit);
-    }
-
-    genNextInteger = (integer) => {
-        const limit = MAX_INTEGER - integer;
-        return this.genRandomInteger(limit);
-    }
-
-    createQuestion = () => {
-        var num1, num2, num3, num4 = 0;
-
-        num1 = this.genRandomInteger(MAX_INTEGER);
-        num3 = this.genNextInteger(num1);
-        num2 = this.genRandomInteger(MAX_INTEGER);
-        num4 = this.genNextInteger(num2);
-
-
-        while(this.props.questionReducer.lastQuestions.includes([{num1, num2, num3, num4}]))
-        {
-            num1 = this.genRandomInteger(MAX_INTEGER);
-            num3 = this.genNextInteger(num1);
-            num2 = this.genRandomInteger(MAX_INTEGER);
-            num4 = this.genNextInteger(num2);
-        }
-
-        return [{num1, num2, num3, num4}];
-    }
-
     createQuestions = (quantity) => {
         for(let i=0; i < quantity; ++i)
         {
-            this.props.addQuestionAsync(this.createQuestion());
+           let question = this.factory.create(OPERATION.ADDITION);
+           this.props.addQuestionAsync(question.numbers);
         }
     }
 
     componentDidMount()
     {
-        //Todo: Trigger addQuestions(quantity)
 
-        // Testing:
-        let factory = new TaskFactory(GRADE.FIRST);
-        let question = factory.create(OPERATION.ADDITION);
-        console.log(question);
     }
 
     render() {

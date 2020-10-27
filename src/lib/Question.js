@@ -15,7 +15,7 @@ export default class Question {
         this.operation = operation;
         this.grade = grade;
         this.integerMaxLimit = this.setIntegerMaxLimit(grade)
-        this.question = null;
+        this.numbers = null;
     }
 
     // TODO: This is for addition only, need to adjust this for handling other operations.
@@ -37,7 +37,7 @@ export default class Question {
         return this.genRandomInteger(limit);
     }
 
-    createQuestion = () => {
+    create = () => {
         let num1, num2, num3, num4 = 0;
 
         num1 = this.genRandomInteger(this.integerMaxLimit);
@@ -45,8 +45,8 @@ export default class Question {
         num2 = this.genRandomInteger(this.integerMaxLimit);
         num4 = this.genNextInteger(num2);
 
-        this.question = [{num1, num2, num3, num4}];
-        return this.question;
+        this.numbers = [{num1, num2, num3, num4}];
+        return this.numbers;
     }
 
 }
