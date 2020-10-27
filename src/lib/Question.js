@@ -14,7 +14,7 @@ export default class Question {
     constructor(operation, grade) {
         this.operation = operation;
         this.grade = grade;
-        this.integerMaxLimit = this.setIntegerMaxLimit(grade)
+        this.limits = this.setIntegerMaxLimit(grade)
         this.numbers = null;
     }
 
@@ -22,9 +22,9 @@ export default class Question {
     setIntegerMaxLimit = (grade) => {
         switch (grade)
         {
-            case GRADE.FIRST: return 10;
-            case GRADE.SECOND: return 20;
-            case GRADE.THIRD: return 30;
+            case GRADE.FIRST: return {maxNumberValue: 10, maxNumbers: 4};
+            case GRADE.SECOND: return {maxNumberValue: 10, maxNumbers: 4};
+            case GRADE.THIRD: return {maxNumberValue: 10, maxNumbers: 6};
         }
     }
 
@@ -33,16 +33,21 @@ export default class Question {
     }
 
     genNextInteger = (integer) => {
-        const limit = this.integerMaxLimit - integer;
+        let limit = this.limits.maxNumberValue;
+
+        if (this.grade === GRADE.FIRST) {
+            limit = this.limits.maxNumberValue - integer;
+        }
+
         return this.genRandomInteger(limit);
     }
 
     create = () => {
         let num1, num2, num3, num4 = 0;
 
-        num1 = this.genRandomInteger(this.integerMaxLimit);
+        num1 = this.genRandomInteger(this.limits.maxNumberValue);
         num3 = this.genNextInteger(num1);
-        num2 = this.genRandomInteger(this.integerMaxLimit);
+        num2 = this.genRandomInteger(this.limits.maxNumberValue);
         num4 = this.genNextInteger(num2);
 
         this.numbers = [{num1, num2, num3, num4}];

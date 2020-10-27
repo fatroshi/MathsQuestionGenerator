@@ -13,7 +13,7 @@ export const addQuestionAsync = (question) => {
                 type: 'ADD_QUESTION_ASYNC',
                 payload: question
             })
-        }, 2000)
+        }, 100)
     }
 
 

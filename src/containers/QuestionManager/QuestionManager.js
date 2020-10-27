@@ -4,6 +4,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { connect } from 'react-redux';
 import { saveAs } from 'file-saver';
 import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 import './style.scss';
 
 import TaskFactory from "../../lib/TaskFactory";
@@ -18,13 +19,15 @@ class QuestionManager extends React.Component {
         this.factory = new TaskFactory(GRADE.FIRST);
     }
 
-    saveAsPNG = () => {
-        html2canvas(document.getElementById("capture")).then(function(canvas) {
-            //document.body.appendChild(canvas);
-            canvas.toBlob((blob) => {
-                saveAs(canvas.toDataURL(), 'test.png', true);
-            },'image/png')
-        });
+    saveAsPDF = () => {
+        const input = document.getElementById('page');
+        html2canvas(input)
+            .then((canvas) => {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF();
+                pdf.addImage(imgData, 'PNG',0, 0, 210, 297);
+                pdf.save("download.pdf");
+            });
     }
 
     createQuestions = (quantity) => {
@@ -42,23 +45,26 @@ class QuestionManager extends React.Component {
 
     render() {
         return (
-            <Container id='capture'>
+            <>
                 <h1>{this.props.userReducer.name}</h1>
-                <h1>{console.log(this.props.questionReducer.lastQuestions)}</h1>
+                <button onClick={() => this.createQuestions(3)}>Add Questions</button>
+                <button onClick={() => this.saveAsPDF()}>Save</button>
 
-                <Row className={'questions-container row-spacing'}>
-                    {this.props.questionReducer.lastQuestions.map((questions, index) =>(
-                        <Row className={'row-spacing'} key={index}>
-                            {questions.map((question, index2) => (
-                                <Col key={index2}><BoxNumber question={question} /></Col>
+                <Container id='page' className='page'>
+                    <div className=''>
+                        <Row className={'questions-container row-spacing'}>
+                            {this.props.questionReducer.lastQuestions.map((questions, index) =>(
+                                <Row className={'row-spacing'} key={index}>
+                                    {questions.map((question, index2) => (
+                                        <Col key={index2}><BoxNumber question={question} /></Col>
+                                    ))}
+                                </Row>
                             ))}
                         </Row>
-                    ))}
-                </Row>
+                    </div>
 
-                <button onClick={() => this.createQuestions(16)}>Add Questions</button>
-                <button onClick={() => this.saveAsPNG()}>Save</button>
-            </Container>
+                </Container>
+            </>
         );
     }
 }
@@ -80,16 +86,7 @@ const mapDispatchToProps = (dispatch) => {
                payload: name
             });
         },
-        // alt 1.
-        /*
-        addQuestion: (question) => {
-            dispatch({
-               type: 'ADD_QUESTION',
-               payload: question
-            });
-        }*/
 
-        // alt. 2
         addQuestion: (question) => {
             dispatch(addQuestion(question));
         },

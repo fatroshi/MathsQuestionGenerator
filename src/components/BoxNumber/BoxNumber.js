@@ -45,6 +45,13 @@ class BoxNumber extends React.Component {
                         <Col>  </Col>
                     </Row>
 
+
+                    <Row className={'md-row'}>
+                        <Col xs={1} md={4} className={'md-box'}></Col>
+                        <Col xs={1} md={4} className={'md-box first-term'}></Col>
+                        <Col xs={1} md={4} className={'md-box first-term'}></Col>
+                    </Row>
+
                     <Row className={'md-row'}>
                         <Col xs={1} md={4} className={'md-box'}></Col>
                         <Col xs={1} md={4} className={'md-box first-term'}>{num1}</Col>
