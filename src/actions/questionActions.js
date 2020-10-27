@@ -4,3 +4,17 @@ export const addQuestion = (question) => {
         payload: question
     }
 }
+
+export const addQuestionAsync = (question) => {
+
+    return dispatch => {
+        setTimeout(()=> {
+            dispatch({
+                type: 'ADD_QUESTION_ASYNC',
+                payload: question
+            })
+        }, 2000)
+    }
+
+
+}

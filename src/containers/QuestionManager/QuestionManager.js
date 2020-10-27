@@ -8,7 +8,7 @@ import './style.scss';
 
 import TaskFactory from "../../lib/TaskFactory";
 import {GRADE, OPERATION} from "../../lib/Question";
-import {addQuestion} from "../../actions/questionActions";
+import {addQuestion, addQuestionAsync} from "../../actions/questionActions";
 
 const MAX_INTEGER = 10;
 
@@ -17,7 +17,7 @@ class QuestionManager extends React.Component {
         super(...props);
     }
 
-    SaveAsPNG = () => {
+    saveAsPNG = () => {
         html2canvas(document.getElementById("capture")).then(function(canvas) {
             //document.body.appendChild(canvas);
             canvas.toBlob((blob) => {
@@ -58,7 +58,7 @@ class QuestionManager extends React.Component {
     createQuestions = (quantity) => {
         for(let i=0; i < quantity; ++i)
         {
-            this.props.addQuestion(this.createQuestion());
+            this.props.addQuestionAsync(this.createQuestion());
         }
     }
 
@@ -89,7 +89,7 @@ class QuestionManager extends React.Component {
                 </Row>
 
                 <button onClick={() => this.createQuestions(16)}>Add Questions</button>
-                <button onClick={() => this.SaveAsPNG()}>Save</button>
+                <button onClick={() => this.saveAsPNG()}>Save</button>
             </Container>
         );
     }
@@ -124,6 +124,10 @@ const mapDispatchToProps = (dispatch) => {
         // alt. 2
         addQuestion: (question) => {
             dispatch(addQuestion(question));
+        },
+
+        addQuestionAsync: (question) => {
+            dispatch(addQuestionAsync(question));
         }
 
     }

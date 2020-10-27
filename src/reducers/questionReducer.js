@@ -21,6 +21,14 @@ const questionReducer = (state = initialState, action) => {
                 lastQuestions: [...state.lastQuestions, action.payload]
             };
             break;
+
+        case "ADD_QUESTION_ASYNC":
+            state = {
+                ...state,
+                question: action.payload,
+                lastQuestions: [...state.lastQuestions, action.payload]
+            };
+            break;
     }
 
     return state;

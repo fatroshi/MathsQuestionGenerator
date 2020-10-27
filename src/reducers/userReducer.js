@@ -1,4 +1,4 @@
-const userReducer = (state = {name: "Elise", age: 8}, action) => {
+const userReducer = (state = {name: "Felicia", age: 8}, action) => {
     switch (action.type)
     {
         case "SET_NAME":
