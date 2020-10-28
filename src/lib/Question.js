@@ -18,7 +18,7 @@ export default class Question {
         this.numbers = null;
     }
 
-    // TODO: This is for addition only, need to adjust this for handling other operations.
+    // TODO: This is for addition only, need to adjust this for handling other operations, and more numbers
     setIntegerMaxLimit = (grade) => {
         switch (grade)
         {
